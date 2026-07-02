@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.CallVerify" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorPrimary">#38BDF8</item>
+        <item name="colorPrimaryVariant">#0EA5E9</item>
+        <item name="colorOnPrimary">#000000</item>
+        <item name="colorSecondary">#1D4ED8</item>
+        <item name="android:windowBackground">#0F172A</item>
+        <item name="android:statusBarColor">#0F172A</item>
+    </style>
+</resources>

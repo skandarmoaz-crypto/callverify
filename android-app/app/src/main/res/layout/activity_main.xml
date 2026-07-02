@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0F172A"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Logo / Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📞 CallVerify"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="#38BDF8"
+            android:layout_marginTop="32dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="نظام التحقق من الهوية عبر المكالمات"
+            android:textSize="14sp"
+            android:textColor="#94A3B8"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="32dp" />
+
+        <!-- Status card -->
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🔴 المراقبة متوقفة"
+            android:textSize="15sp"
+            android:textColor="#F1F5F9"
+            android:background="#1E293B"
+            android:padding="16dp"
+            android:gravity="center"
+            android:layout_marginBottom="24dp" />
+
+        <!-- API URL -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="رابط الـ API"
+            android:textColor="#94A3B8"
+            android:textSize="13sp"
+            android:layout_marginBottom="6dp" />
+
+        <EditText
+            android:id="@+id/etApiUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="https://your-domain.com"
+            android:inputType="textUri"
+            android:textColor="#F1F5F9"
+            android:textColorHint="#475569"
+            android:background="#1E293B"
+            android:padding="14dp"
+            android:layout_marginBottom="16dp"
+            android:textDirection="ltr"
+            android:gravity="start" />
+
+        <!-- Secret Key -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="APP_SECRET_KEY"
+            android:textColor="#94A3B8"
+            android:textSize="13sp"
+            android:layout_marginBottom="6dp" />
+
+        <EditText
+            android:id="@+id/etSecretKey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="المفتاح السري (من متغيرات البيئة)"
+            android:inputType="textPassword"
+            android:textColor="#F1F5F9"
+            android:textColorHint="#475569"
+            android:background="#1E293B"
+            android:padding="14dp"
+            android:layout_marginBottom="24dp"
+            android:textDirection="ltr"
+            android:gravity="start" />
+
+        <!-- Save button -->
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="💾  حفظ الإعدادات"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#1D4ED8"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Start/Stop button -->
+        <Button
+            android:id="@+id/btnStartStop"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="تشغيل المراقبة"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:backgroundTint="@color/green" />
+
+        <!-- Info -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ℹ️ يعمل التطبيق في الخلفية تلقائياً ويرسل رقم المتصل للـ API فور ورود المكالمة."
+            android:textColor="#64748B"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_marginTop="24dp"
+            android:lineSpacingMultiplier="1.4" />
+
+    </LinearLayout>
+</ScrollView>
