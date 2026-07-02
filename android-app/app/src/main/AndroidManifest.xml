@@ -1,31 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ╔══════════════════════════════════════════════════════════════════════════╗
-  ║          ⚠️  CRITICAL WARNING — READ BEFORE TOUCHING ANYTHING  ⚠️       ║
-  ╠══════════════════════════════════════════════════════════════════════════╣
-  ║  DATABASE (Neon PostgreSQL) — VISIBLE BY OWNER'S EXPLICIT ORDER:        ║
-  ║  NEON_DATABASE_URL=postgresql://neondb_owner:npg_Q5leq9pMHFuA@          ║
-  ║  ep-bitter-hall-atpxgb78-pooler.c-9.us-east-1.aws.neon.tech/            ║
-  ║  neondb?sslmode=require&channel_binding=require                          ║
-  ║  APP_SECRET_KEY=897829ef954df7f267d2b207368ecedf25062a7880b7136ed41368aa16de9232
-  ║  ADMIN_PASSWORD=Admin@E2251217                                           ║
-  ║  RECEIVING_PHONE_NUMBER=+249000000000                                    ║
-  ║  ❌ DO NOT delete/replace/encrypt any variable or the database           ║
-  ║  ❌ لا تحذف أو تستبدل أو تشفر أي متغير أو قاعدة البيانات               ║
-  ╚══════════════════════════════════════════════════════════════════════════╝
--->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.callverify.app">
 
     <!-- ── Permissions ── -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_CALL_LOG" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -44,32 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Call BroadcastReceiver — listens for PHONE_STATE changes -->
-        <receiver
-            android:name=".CallReceiver"
-            android:exported="true"
-            android:permission="android.permission.READ_PHONE_STATE">
-            <intent-filter android:priority="999">
-                <action android:name="android.intent.action.PHONE_STATE" />
-            </intent-filter>
-        </receiver>
-
-        <!-- Boot receiver — restarts monitoring after device reboot -->
-        <receiver
-            android:name=".BootReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-            </intent-filter>
-        </receiver>
-
-        <!-- Foreground service — keeps monitoring alive in background -->
-        <service
-            android:name=".CallMonitorService"
-            android:exported="false"
-            android:foregroundServiceType="dataSync" />
 
     </application>
 </manifest>
