@@ -37,13 +37,20 @@ jobs:
       - name: Create launcher icons
         working-directory: android-app/app/src/main/res
         run: |
-          for entry in "mipmap-mdpi:48" "mipmap-hdpi:72" "mipmap-xhdpi:96" "mipmap-xxhdpi:144" "mipmap-xxxhdpi:192"; do
-            dir=$(echo $entry | cut -d: -f1)
-            size=$(echo $entry | cut -d: -f2)
-            mkdir -p $dir
-            convert -size ${size}x${size} xc:#2196F3 $dir/ic_launcher.png
-            convert -size ${size}x${size} xc:#2196F3 $dir/ic_launcher_round.png
-          done
+          python3 -c "
+import struct, zlib, os
+def png(w,h,r,g,b):
+    def chunk(t,d):
+        c=struct.pack(">I",len(d))+t+d
+        return c+struct.pack(">I",zlib.crc32(t+d)&0xffffffff)
+    raw=b"".join(b"\x00"+bytes([r,g,b]*w) for _ in range(h))
+    return b"\x89PNG\r\n\x1a\n"+chunk(b"IHDR",struct.pack(">IIBBBBB",w,h,8,2,0,0,0))+chunk(b"IDAT",zlib.compress(raw))+chunk(b"IEND",b"")
+for d,s in [("mipmap-mdpi",48),("mipmap-hdpi",72),("mipmap-xhdpi",96),("mipmap-xxhdpi",144),("mipmap-xxxhdpi",192)]:
+    os.makedirs(d,exist_ok=True)
+    data=png(s,s,33,150,243)
+    open(d+"/ic_launcher.png","wb").write(data)
+    open(d+"/ic_launcher_round.png","wb").write(data)
+"
 
       - name: Cache Gradle Packages
         uses: actions/cache@v4
