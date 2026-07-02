@@ -3,11 +3,14 @@ import { logger } from "./lib/logger";
 import { initDb } from "./db";
 
 // Validate all required env vars at startup
-const required = ["PORT", "DATABASE_URL", "APP_SECRET_KEY", "ADMIN_PASSWORD"] as const;
+const required = ["PORT", "APP_SECRET_KEY", "ADMIN_PASSWORD"] as const;
 for (const key of required) {
   if (!process.env[key]) {
     throw new Error(`Required environment variable "${key}" is not set`);
   }
+}
+if (!process.env.NEON_DATABASE_URL && !process.env.DATABASE_URL) {
+  throw new Error("NEON_DATABASE_URL or DATABASE_URL must be set");
 }
 
 if (!process.env.RECEIVING_PHONE_NUMBER) {
