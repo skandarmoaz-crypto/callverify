@@ -34,6 +34,17 @@ jobs:
           mkdir -p gradle/wrapper
           curl -fsSL -o gradle/wrapper/gradle-wrapper.jar https://github.com/gradle/gradle/raw/v8.6.0/gradle/wrapper/gradle-wrapper.jar
 
+      - name: Create launcher icons
+        working-directory: android-app/app/src/main/res
+        run: |
+          for entry in "mipmap-mdpi:48" "mipmap-hdpi:72" "mipmap-xhdpi:96" "mipmap-xxhdpi:144" "mipmap-xxxhdpi:192"; do
+            dir=$(echo $entry | cut -d: -f1)
+            size=$(echo $entry | cut -d: -f2)
+            mkdir -p $dir
+            convert -size ${size}x${size} xc:#2196F3 $dir/ic_launcher.png
+            convert -size ${size}x${size} xc:#2196F3 $dir/ic_launcher_round.png
+          done
+
       - name: Cache Gradle Packages
         uses: actions/cache@v4
         with:
