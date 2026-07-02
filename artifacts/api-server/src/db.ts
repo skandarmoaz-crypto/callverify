@@ -11,6 +11,7 @@ export const pool = new Pool({
 });
 
 export async function initDb(): Promise<void> {
+  await pool.query(`CREATE EXTENSION IF NOT EXISTS pgcrypto;`);
   await pool.query(`
     CREATE TABLE IF NOT EXISTS api_keys (
       id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),

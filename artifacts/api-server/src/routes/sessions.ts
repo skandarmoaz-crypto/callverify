@@ -36,7 +36,13 @@ router.post("/sessions", requireApiKey, async (req, res) => {
 
   const expiresAt = new Date(session.expires_at);
   const expiresInSeconds = Math.max(0, Math.round((expiresAt.getTime() - Date.now()) / 1000));
-  const callNumber = process.env.RECEIVING_PHONE_NUMBER;
+
+  // Read from settings table first, fall back to env var
+  const settingsRes = await pool.query<{ value: string }>(
+    "SELECT value FROM settings WHERE key = 'receiving_phone_number'",
+  );
+  const callNumber =
+    settingsRes.rows[0]?.value ?? process.env.RECEIVING_PHONE_NUMBER ?? "+249000000000";
 
   res.status(201).json({
     id: session.id,

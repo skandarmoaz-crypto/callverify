@@ -9,6 +9,10 @@ router.use(requireAdmin);
 
 // GET /api/admin/stats
 router.get("/stats", async (_req, res) => {
+  // Mark overdue sessions as expired before computing stats
+  await pool.query(
+    `UPDATE sessions SET status = 'expired' WHERE status = 'pending' AND expires_at < NOW()`,
+  );
   const [sessionsRes, keysRes] = await Promise.all([
     pool.query(`
       SELECT
@@ -29,6 +33,10 @@ router.get("/stats", async (_req, res) => {
 
 // GET /api/admin/sessions?page=1
 router.get("/sessions", async (req, res) => {
+  // Materialise expiry before listing
+  await pool.query(
+    `UPDATE sessions SET status = 'expired' WHERE status = 'pending' AND expires_at < NOW()`,
+  );
   const page = Math.max(1, parseInt(String(req.query["page"] ?? "1"), 10));
   const limit = 20;
   const offset = (page - 1) * limit;
