@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "WbteumX89mC02xO5NYA4C"
+uri = "file://callverify-full.zip"
+type = "unspecified"
+title = "callverify-full.zip — المشروع الكامل"
