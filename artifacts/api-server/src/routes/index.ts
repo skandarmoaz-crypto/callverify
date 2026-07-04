@@ -59,10 +59,12 @@ import sessionsRouter from "./sessions";
 import incomingCallRouter from "./incomingCall";
 import adminRouter from "./admin";
 import settingsRouter from "./settings";
+import docsRouter from "./docs";
 
 const router: IRouter = Router();
 
 router.use(healthRouter);
+router.use(docsRouter);
 router.use(sessionsRouter);
 router.use(incomingCallRouter);
 router.use("/admin", adminRouter);
