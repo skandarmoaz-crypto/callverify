@@ -175,7 +175,7 @@ export default function Developer() {
 
   const steps = [
     { icon: Globe,       title: 'موقعك يطلب التحقق',         desc: 'يرسل موقعك POST /api/sessions مع رقم هاتف المستخدم.' },
-    { icon: Phone,       title: 'المستخدم يتصل',              desc: `يظهر للمستخدم رقم ${receivingPhone} ويتصل منه.` },
+    { icon: Phone,       title: 'المستخدم يتصل',              desc: <>يظهر للمستخدم رقم <span dir="ltr" className="font-mono">{receivingPhone}</span> ويتصل منه.</> },
     { icon: Zap,         title: 'Android يلتقط المكالمة',     desc: 'تطبيق Android يرصد المكالمة ويرسلها للـ API تلقائياً.' },
     { icon: ShieldCheck, title: 'الجلسة تُعلَّم بـ verified', desc: 'موقعك يتحقق من الحالة ويكمل تسجيل الدخول.' },
   ];
