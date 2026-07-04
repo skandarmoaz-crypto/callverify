@@ -99,6 +99,11 @@ router.post("/sessions", requireApiKey, async (req, res) => {
   const callNumber =
     settingsRes.rows[0]?.value ?? process.env.RECEIVING_PHONE_NUMBER ?? "+249000000000";
 
+  // Wrap phone numbers in a Unicode LTR isolate (U+2066 ... U+2069) so the
+  // leading "+" always renders at the START of the number, even when the
+  // number is embedded inside an Arabic (RTL) sentence.
+  const ltr = (value: string) => `\u2066${value}\u2069`;
+
   res.status(201).json({
     id: session.id,
     phone: session.phone,
@@ -108,7 +113,7 @@ router.post("/sessions", requireApiKey, async (req, res) => {
     expires_in_seconds: expiresInSeconds,
     call_number: callNumber,
     instructions: {
-      ar: `يرجى الاتصال بـ ${callNumber} من الرقم ${session.phone} للتحقق`,
+      ar: `يرجى الاتصال بـ ${ltr(callNumber)} من الرقم ${ltr(session.phone)} للتحقق`,
       en: `Please call ${callNumber} from ${session.phone} to verify your identity`,
     },
   });
